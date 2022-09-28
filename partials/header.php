@@ -12,6 +12,6 @@
     <title>Generate Link</title>
 </head>
 <body>
-    <h1 class="bg-cyan-600 p-4 text-center text-white">This is Header</h1>
+    <!-- <h1 class="bg-cyan-600 p-4 text-center text-white">This is Header</h1> -->
    
    
