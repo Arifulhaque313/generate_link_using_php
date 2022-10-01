@@ -1,6 +1,7 @@
 <?php
     session_start();
     $user_id = $_SESSION['id'];
+    $limit = $_SESSION['limit'];
 
     if($user_id) {
     include 'partials/header.php'; 
@@ -10,10 +11,31 @@
         $title = mysqli_real_escape_string($db,$_POST['title']);
         $link = mysqli_real_escape_string($db,$_POST['link']);
         
-        $query="insert into links(title,user_id, link) values('$title','$user_id','$link')";
-        mysqli_query($db,$query);
-       
-        $last_id = $db->insert_id;
+        $count_link = "select * from links where user_id ='$user_id'";
+
+        $result = mysqli_query($db,$count_link);
+        $link_count = mysqli_num_rows($result);
+
+        if($link_count >= $limit){
+            ?>
+                <script>
+                    alert("Your limit has been finished");
+                    window.location.href="login.php";
+                </script>
+            <?php
+            
+        }
+
+        else{
+            $query="insert into links(title,user_id, link) values('$title','$user_id','$link')";
+            mysqli_query($db,$query);
+        
+            $last_id = $db->insert_id;
+
+            $left_limit = ($limit - $link_count)-1;
+        }
+
+        
         
     }
                         
@@ -26,7 +48,8 @@
                     <div class="pb-2">
                         <?php
                            if(!$title == null && !$link == null ){
-                             echo "<p class='text-blue-600'><b>".$_SERVER['HTTP_HOST']."/"."bio.php?ID=". $last_id."</b></p>";
+                             echo "<p class='text-blue-600'><b>".$_SERVER['HTTP_HOST']."/"."bio.php?ID=". $last_id."<br>"."</br></p>";
+                             echo "<p class='text-blue-600'><b>"."You Have Only ".$left_limit." link left"."</b></p>";
                            }
                         ?>
                     </div>

@@ -17,6 +17,7 @@
             $_SESSION['id'] = $email_pass['id'];
             $_SESSION['name'] = $email_pass['name'];
             $_SESSION['email'] = $email_pass['email'];
+            $_SESSION['limit'] = $email_pass['limit'];
 
             $db_pass = $email_pass['password'];
             $pass_decode = password_verify($password, $db_pass);
