@@ -5,7 +5,8 @@
     include 'partials/header.php'; 
     include "partials/db.php";
 
-    $id = $_GET["ID"];
+    $id2 = $_GET["ID"];
+    $id = base64_decode($id2);
     $search_link = "select * from links where id = '$id'";
 
     $result = mysqli_query($db,$search_link);

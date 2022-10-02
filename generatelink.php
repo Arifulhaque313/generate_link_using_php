@@ -30,7 +30,8 @@
             $query="insert into links(title,user_id, link) values('$title','$user_id','$link')";
             mysqli_query($db,$query);
         
-            $last_id = $db->insert_id;
+            $last_id2 = $db->insert_id;
+            $last_id = base64_encode($last_id2);
 
             $left_limit = ($limit - $link_count)-1;
         }
